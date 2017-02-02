@@ -4,6 +4,7 @@ angular.module('actions').controller('TableController',
         $http.get("stocks.json")
             .then(function(response) {
                 $scope.stocks = [];
+                console.log($scope.stocks);
                 response.data.forEach(function(data) {
                     var newStock = new Stock(data);
                     $scope.stocks.push(newStock);
@@ -11,8 +12,4 @@ angular.module('actions').controller('TableController',
             }, function(error) {
                 console.log(error);
             });
-
-        $scope.yolo = function() {
-            console.log($scope.search.Name);
-        }
     }]);
