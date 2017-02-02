@@ -1,11 +1,11 @@
 /**
  * Created by jerome on 31/01/2017.
  */
-angular.module('actions').directive('stock',
+angular.module('actions').directive('stockbought',
     [function() {
         return {
             restrict: 'A',
             replace: true,
-            templateUrl: 'client/template/stock.html',
+            templateUrl: 'client/template/stockbought.html',
         }
     }]);
