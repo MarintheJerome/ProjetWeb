@@ -82,3 +82,7 @@ html, body {
 #table-all-actions{
     overflow: auto;
 }
+
+th {
+    text-align:center
+}
