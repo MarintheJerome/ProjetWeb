@@ -24,11 +24,11 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <label>Price min</label>
-                                        <input class="form-control" type="text"/>
+                                        <input ng-model="minPrice" class="form-control" type="text"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Price max</label>
-                                        <input class="form-control" type="text"/>
+                                        <input ng-model="maxPrice" class="form-control" type="text"/>
                                     </div>
                                 </form>
                             </div>
@@ -51,7 +51,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr stock ng-repeat="stock in stocks | filter:searchStocks">
+                        <tr stock ng-repeat="stock in stocks | filter:priceFilter">
                         </tr>
                     </tbody>
                 </table>
@@ -175,7 +175,6 @@
 <script src="client/js/search.js"></script>
 <script src="client/app/model/stock.js"></script>
 <script src="client/app/directive/stock-directive.js"></script>
-<script src="client/app/controller/SearchController.js"></script>
 <script src="client/app/controller/TableController.js"></script>
 </body>
 </html>

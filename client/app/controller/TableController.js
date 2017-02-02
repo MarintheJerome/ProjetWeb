@@ -11,4 +11,30 @@ angular.module('actions').controller('TableController',
             }, function(error) {
                 console.log(error);
             });
+
+        $scope.priceFilter = function (Stock) {
+            var price = parseFloat(Stock.price);
+            var min = parseFloat($scope.minPrice);
+            var max = parseFloat($scope.maxPrice);
+
+            console.log(Stock);
+            console.log($scope);
+            console.log(max);
+            console.log(min);
+            console.log(price);
+            if (!price) {
+                return false;
+            }
+
+            if(min && price < min) {
+                return false;
+            }
+
+            if(max && price > max) {
+                return false;
+            }
+
+            return true;
+        };
     }]);
+
