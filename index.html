@@ -51,7 +51,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr stock ng-repeat="stock in stocks | filter:priceFilter">
+                        <tr stock ng-repeat="stock in stocks | filter:searchStocks |  filter:priceFilter">
                         </tr>
                     </tbody>
                 </table>
