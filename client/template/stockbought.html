@@ -3,6 +3,6 @@
     <td>{{stock.from}}</td>
     <td>{{stock.price}}</td>
     <td>
-        <a ng-click="buyStock(stock)" href="#" class="btn btn-primary btn-success">Acheter</a>
+        <a ng-controller="BuyController" ng-click="buyStock(stock)" href="#" class="btn btn-primary btn-success">Vendre</a>
     </td>
 </tr>

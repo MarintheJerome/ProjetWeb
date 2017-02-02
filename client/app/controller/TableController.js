@@ -12,9 +12,9 @@ angular.module('actions').controller('TableController',
                 console.log(error);
             });
 
-        $scope.buyStock = function(stock){
+     /*   $scope.buyStock = function(stock){
             angular.element(document.getElementById('allActions')).scope().addStock(stock);
-        }
+        } */
 
         $scope.priceFilter = function (Stock) {
             var price = parseFloat(Stock.price);
