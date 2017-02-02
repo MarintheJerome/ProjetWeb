@@ -5,6 +5,7 @@ angular.module('actions').factory('Stock',
     [function() {
         var Stock = function(data) {
             this.id = data.id;
+            this.from = data.e;
             this.name = data.t;
             this.price = data.l;
         }
