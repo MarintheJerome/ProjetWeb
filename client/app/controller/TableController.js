@@ -16,12 +16,7 @@ angular.module('actions').controller('TableController',
             var price = parseFloat(Stock.price);
             var min = parseFloat($scope.minPrice);
             var max = parseFloat($scope.maxPrice);
-
-            console.log(Stock);
-            console.log($scope);
-            console.log(max);
-            console.log(min);
-            console.log(price);
+            
             if (!price) {
                 return false;
             }
