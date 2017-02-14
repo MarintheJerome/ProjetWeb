@@ -1,6 +1,11 @@
 
 # Created by https://www.gitignore.io/api/linux,macos,phpstorm,windows
 
+.idea/
+node_modules/
+Projet/client/lib
+Projet/client/fonts
+
 ### Linux ###
 *~
 
