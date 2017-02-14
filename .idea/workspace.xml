@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41ba5814-476b-48d3-b180-69a92c00ebf8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Projet/client/app/controller/TableController.js" afterPath="$PROJECT_DIR$/Projet/client/app/controller/TableController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Projet/client/app/model/stock.js" afterPath="$PROJECT_DIR$/Projet/client/app/model/stock.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Projet/client/template/stock.html" afterPath="$PROJECT_DIR$/Projet/client/template/stock.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Projet/index.html" afterPath="$PROJECT_DIR$/Projet/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/ProjetTest.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -432,12 +431,12 @@
       <workItem from="1486022142136" duration="25394000" />
       <workItem from="1486476492242" duration="31000" />
       <workItem from="1487055940277" duration="4284000" />
-      <workItem from="1487064058598" duration="6134000" />
+      <workItem from="1487064058598" duration="6392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78278000" />
+    <option name="totallyTimeSpent" value="78536000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
