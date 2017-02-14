@@ -11,48 +11,48 @@
 <body ng-app="actions">
 <div class="container-fluid">
     <div class="row">
-        <div id="recherche" style="display: flex; flex-direction: column" class="rectangle col-md-6">
+        <div ng-controller="TableController" id="recherche" style="display: flex; flex-direction: column" class="rectangle col-md-6">
             <h2 class="text-center ">Buy some stocks</h2>
-            <div ng-controller="TableController" class="input-group" id="adv-search">
-                <input ng-model="searchStocks" type="text" class="form-control" placeholder="Search for stocks"/>
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label>Price min</label>
-                                        <input ng-model="minPrice" class="form-control" type="text"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Price max</label>
-                                        <input ng-model="maxPrice" class="form-control" type="text"/>
-                                    </div>
-                                </form>
+                <div class="input-group" id="adv-search">
+                    <input ng-model="searchStocks" type="text" class="form-control" placeholder="Search for stocks"/>
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label>Price min</label>
+                                            <input ng-model="minPrice" class="form-control" type="text"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Price max</label>
+                                            <input ng-model="maxPrice" class="form-control" type="text"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
-                            <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="table-search-actions" ng-controller="TableController">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="col-md-1">Name</th>
-                        <th class="col-md-1">From</th>
-                        <th class="col-md-1">Price</th>
-                        <th class="col-md-1">Buy</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr stock ng-repeat="stock in stocks | filter:searchStocks |  filter:priceFilter">
+                <div id="table-search-actions">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1">Name</th>
+                            <th class="col-md-1">Symbol</th>
+                            <th class="col-md-1">Price</th>
+                            <th class="col-md-1">Buy</th>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                        <tr stock ng-repeat="stock in stocks">
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
         <div id="graphique" style="display: flex; flex-direction: column" class="rectangle col-md-6" >
             <h2 class="text-center ">Graphics</h2>
