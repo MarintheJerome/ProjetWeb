@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Actions</title>
+    <link rel="stylesheet" type="text/css" href="client/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="client/css/style.css">
+    <link rel="stylesheet" type="text/css"  href="client/lib/c3-0.4.11/c3.css">
+    <script src="client/lib/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body ng-app="actions">
+<div class="container-fluid">
+    <div class="row">
+        <div id="recherche" style="display: flex; flex-direction: column" class="rectangle col-md-6">
+            <h2 class="text-center ">Buy some stocks</h2>
+            <div ng-controller="TableController" class="input-group" id="adv-search">
+                <input ng-model="searchStocks" type="text" class="form-control" placeholder="Search for stocks"/>
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label>Price min</label>
+                                        <input ng-model="minPrice" class="form-control" type="text"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price max</label>
+                                        <input ng-model="maxPrice" class="form-control" type="text"/>
+                                    </div>
+                                </form>
+                            </div>
+                            <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="table-search-actions" ng-controller="TableController">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">Name</th>
+                        <th class="col-md-1">From</th>
+                        <th class="col-md-1">Price</th>
+                        <th class="col-md-1">Buy</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr stock ng-repeat="stock in stocks | filter:searchStocks |  filter:priceFilter">
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="graphique" style="display: flex; flex-direction: column" class="rectangle col-md-6" >
+            <h2 class="text-center ">Graphics</h2>
+            <div id="chart"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-controller="BuyController" id="allActions" style="display: flex; flex-direction: column"  class="rectangle col-md-6">
+            <h2 class="text-center"> Your Stock </h2>
+            <div id="table-all-actions">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">Name</th>
+                        <th class="col-md-1">Quantity</th>
+                        <th class="col-md-1">From</th>
+                        <th class="col-md-1">Price</th>
+                        <th class="col-md-1">Sell</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr stockbought ng-repeat="stock in stocksbought">
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="plusvalue" style="display: flex; flex-direction: column" class="rectangle col-md-6">
+            <h2 class="text-center ">Plus-value</h2>
+            <div class="divPlusValue">
+                <p>
+                    <label>Argent dépensé : </label>
+                    <label id="nbArgentDepense">0$</label>
+                </p>
+                <p>
+                    <label>Plus-value réalisée :  </label>
+                    <label id="nbPlusValue">0$</label>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="client/lib/boostrap/bootstrap.min.js"></script>
+<script src="client/lib/angular-1.6.1/angular.js"></script>
+<script src="client/lib/d3/d3.js" charset="utf-8"></script>
+<script src="client/lib/c3-0.4.11/c3.js"></script>
+<script src="client/js/app.js"></script>
+<script src="client/js/graphique.js"></script>
+<script src="client/js/search.js"></script>
+<script src="client/app/model/stock.js"></script>
+<script src="client/app/directive/stock-directive.js"></script>
+<script src="client/app/directive/stockbought-directive.js"></script>
+<script src="client/app/controller/TableController.js"></script>
+<script src="client/app/controller/BuyController.js"></script>
+</body>
+</html>

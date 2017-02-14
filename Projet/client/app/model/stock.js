@@ -1,0 +1,14 @@
+/**
+ * Created by jerome on 31/01/2017.
+ */
+angular.module('actions').factory('Stock',
+    [function() {
+        var Stock = function(data) {
+            this.id = data.id;
+            this.from = data.e;
+            this.name = data.t;
+            this.price = data.l;
+            this.quantity = 1;
+        }
+        return Stock;
+    }]);
