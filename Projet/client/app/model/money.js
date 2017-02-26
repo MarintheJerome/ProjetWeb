@@ -6,9 +6,9 @@ angular.module('actions').factory('Money',
         var Money = {};
 
         Money.update = function(data){
-            this.boughtValue = data.boughtValue;
-            this.soldValue = data.soldValue;
-            this.gain = data.gain;
+            this.boughtValue = data.boughtValue.toFixed(2);
+            this.soldValue = data.soldValue.toFixed(2);
+            this.gain = data.gain.toFixed(2);
         };
         return Money;
     }]);

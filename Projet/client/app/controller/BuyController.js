@@ -3,6 +3,7 @@ angular.module('actions').controller('BuyController',
         $scope.stocksbought = [];
 
         $scope.$parent.buyStock = function(stock){
+            console.log($scope.stocksbought);
             $http.post("http://localhost:3000/buy", stock).then(function (rep){
                 var alreadyExists = false;
                 var compteur = 0;
@@ -19,8 +20,8 @@ angular.module('actions').controller('BuyController',
                 $scope.stocksbought.push(stock);
 
                 $http.get('http://localhost:3000/money')
-                    .then(function(rep) {
-                        Money.update(rep.data);
+                    .then(function(reponse) {
+                        Money.update(reponse.data);
                     }, function(error) {
                         console.log(error);
                     });

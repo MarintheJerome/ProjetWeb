@@ -66,7 +66,7 @@ app.route('/buy')
         Stock.findOne({"name": req.body.name}, '_id name symbol quantity currentPrice boughtPrice', function (err, stock) {
             if (err) return handleError(err);
             if (stock != null) { // on update quantity / price bought
-                stock.quantity = stock.quantity + 1;
+                stock.quantity++;
                 stock.save(function (err) {
                     if (err) throw err;
                 });
@@ -74,17 +74,17 @@ app.route('/buy')
                 actionToSave.currentPrice = stock.currentPrice;
                 actionToSave.quantity = stock.quantity;
             } else { // on insert
-                actionToSave.boughtPrice = req.body.price;
-                actionToSave.currentPrice = req.body.price;
+                actionToSave.boughtPrice = parseFloat(req.body.price);
+                actionToSave.currentPrice = parseFloat(req.body.price);
                 actionToSave.save(function (err) {
                     if (err) throw err;
                 });
             }
             // Update dans Money
-            Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
+            Money.find({}, '_id boughtValue gain', function (err, money) {
                 var toUpdate = money[0];
                 toUpdate.boughtValue += parseFloat(req.body.price);
-                toUpdate.gain-= req.body.price;
+                toUpdate.gain -= parseFloat(req.body.price);
                 toUpdate.save(function (err) {
                     if (err) throw err;
                 });
@@ -93,8 +93,40 @@ app.route('/buy')
         })
     });
 
+app.route('/sell')
+    .post(function (req, res, next) {
+        Stock.findOne({"name": req.body.name}, '_id name quantity currentPrice', function(err, stock){
+            if(stock != null){
+                if (err) return handleError(err);
+                stock.quantity--
+                if(stock.quantity >= 1){
+                    stock.save(function (err) {
+                        if (err) throw err;
+                    });
+                }
+                else {
+                    Stock.remove({_id: stock._id}, function (err) {
+                        if (err) return handleError(err);
+                    });
+                }
+                Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
+                    var toUpdate = money[0];
+                    toUpdate.soldValue += parseFloat(req.body.currentPrice);
+                    toUpdate.gain += parseFloat(stock.currentPrice);
+                    toUpdate.save(function (err) {
+                        if (err) throw err;
+                    });
+                });
+                res.send(stock);
+            }
+        })
+    });
+
+
+
 app.route('/money')
     .get(function(req, res, next){
+        // mongoose.connection.db.dropDatabase();
         Money.find({}, function (err, money) {
             var moneyValue = new Money();
             if(money.length > 0) {
