@@ -22,11 +22,14 @@ var StockSchema = new Schema({
     boughtPrice: Number
 });
 
-var Money = new Schema({
-
+var MoneySchema = new Schema({
+    boughtValue: Number,
+    soldValue: Number,
+    gain: Number
 });
 
 var Stock = mongoose.model('Stock', StockSchema);
+var Money = mongoose.model('Money', MoneySchema);
 
 //  angularJS app directory
 app.use(express.static(__dirname + '/Projet'));
@@ -67,18 +70,17 @@ app.route('/buy')
                 stock.save(function (err) {
                     if (err) throw err;
                 });
-                console.log("1");
-                console.log(stock.boughtPrice);
-                res.send(stock);
+                actionToSave.boughtPrice = stock.boughtPrice;
+                actionToSave.currentPrice = stock.currentPrice;
+                actionToSave.quantity = stock.quantity;
             } else { // on insert
                 actionToSave.boughtPrice = req.body.price;
                 actionToSave.currentPrice = req.body.price;
                 actionToSave.save(function (err) {
                     if (err) throw err;
                 });
-                console.log("2");
-                res.send(actionToSave);
             }
+            res.send(actionToSave);
         })
     });
 app.listen('3000');
