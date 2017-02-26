@@ -6,7 +6,8 @@ angular.module('actions').factory('Stock',
         var Stock = function(data) {
             this.name = data.Name;
             this.symbol = data.Symbol;
+            this.quantity = 1;
             this.price = data.Ask;
-        }
+        };
         return Stock;
     }]);

@@ -67,14 +67,15 @@
                     <thead>
                     <tr>
                         <th class="col-md-1">Name</th>
+                        <th class="col-md-1">Symbol</th>
                         <th class="col-md-1">Quantity</th>
-                        <th class="col-md-1">From</th>
-                        <th class="col-md-1">Price</th>
+                        <th class="col-md-1">CurrentPrice</th>
+                        <th class="col-md-1">BoughtPrice</th>
                         <th class="col-md-1">Sell</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr stockbought ng-repeat="stock in stocksbought">
+                    <tr stockbought ng-repeat="stockbought in stocksbought">
                     </tr>
                     </tbody>
                 </table>
@@ -84,12 +85,16 @@
             <h2 class="text-center ">Plus-value</h2>
             <div class="divPlusValue">
                 <p>
-                    <label>Argent dépensé : </label>
-                    <label id="nbArgentDepense">0$</label>
+                    <label class="portefeuille">Argent dépensé : </label>
+                    <label id="nbArgentDepense" class="portefeuille" >0$</label>
                 </p>
                 <p>
-                    <label>Plus-value réalisée :  </label>
-                    <label id="nbPlusValue">0$</label>
+                    <label class="portefeuille">Somme vendue :  </label>
+                    <label id="nbVendue" class="portefeuille" >0$</label>
+                </p>
+                <p>
+                    <label class="portefeuille">Plus-value réalisée :  </label>
+                    <label id="nbPlusValue" class="portefeuille" >0$</label>
                 </p>
             </div>
         </div>
@@ -103,6 +108,7 @@
 <script src="client/js/graphique.js"></script>
 <script src="client/js/search.js"></script>
 <script src="client/app/model/stock.js"></script>
+<script src="client/app/model/stockBought.js"></script>
 <script src="client/app/directive/stock-directive.js"></script>
 <script src="client/app/directive/stockbought-directive.js"></script>
 <script src="client/app/controller/TableController.js"></script>

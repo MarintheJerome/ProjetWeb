@@ -1,9 +1,10 @@
 <tr>
-    <td>{{stock.name}}</td>
-    <td>{{stock.quantity}}</td>
-    <td>{{stock.from}}</td>
-    <td>{{stock.price}}</td>
+    <td>{{stockbought.name}}</td>
+    <td>{{stockbought.symbol}}</td>
+    <td>{{stockbought.quantity}}</td>
+    <td>{{stockbought.currentPrice}}</td>
+    <td>{{stockbought.boughtPrice}}</td>
     <td>
-        <a ng-controller="BuyController" ng-click="buyStock(stock)" href="#" class="btn btn-primary btn-success">Vendre</a>
+        <a ng-controller="BuyController" ng-click="buyStock(stockbought)" href="#" class="btn btn-primary btn-success">Vendre</a>
     </td>
 </tr>
