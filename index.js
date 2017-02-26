@@ -125,7 +125,7 @@ app.route('/sell')
 app.route("/updateStock")
     .get(function(req, res, next){
         Stock.find({}, function (err, stocks) {
-            var allSymbol = "(";
+            var allSymbol = "";
             if(stocks.length > 0){
                 for(var i = 0;i < stocks.length;i++){
                     allSymbol += "'"+stocks[i].symbol+"'";
@@ -134,29 +134,33 @@ app.route("/updateStock")
                     }
                 }
                 allSymbol += ")";
-            }
-            console.log("All symbol : "+allSymbol + "\n\n\n");
+                console.log("All symbol : "+allSymbol + "\n\n\n");
 
-            var url = "https://query.yahooapis.com/v1/public/yql?q=env%20'store%3A%2F%2Fdatatables.org%2Falltableswithkeys'%3B%20" ;
-            var requete = "select symbol, price from yahoo.finance.quotes where symbol IN " + allSymbol;
-            var data = encodeURIComponent(requete);
-            var fullUrl = url + data + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
-            request(fullUrl, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log(JSON.parse(body).query.results.quote);
-                    var mapTemp = new Map();
-                    // on fetch sur tout ce qu'on a récup
-                    (JSON.parse(body).query.results.quote).forEach(function(element){
-                        mapTemp.set(element.symbol, element.price);
-                    });
-                    var array = [];
-                    for(var i = 0;i<stocks.length;i++){
-                        stocks[i].price = mapTemp.get(stocks[i].symbol);
-                        array.push(stocks[i]);
+                var url = "https://query.yahooapis.com/v1/public/yql?q=env%20'store%3A%2F%2Fdatatables.org%2Falltableswithkeys'%3B%20" ;
+                var requete = "select symbol, price from yahoo.finance.quotes where symbol IN (" + allSymbol;
+                var data = encodeURIComponent(requete);
+                var fullUrl = url + data + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
+                request(fullUrl, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        console.log(JSON.parse(body).query.results.quote);
+                        var mapTemp = new Map();
+                        // on fetch sur tout ce qu'on a récup
+                        if( JSON.parse(body).query.results.quote.length > 1) {
+                            (JSON.parse(body).query.results.quote).forEach(function (element) {
+                                mapTemp.set(element.symbol, element.price);
+                            });
+                        }else{
+                            mapTemp.set(JSON.parse(body).query.results.quote.symbol, JSON.parse(body).query.results.quote.price);
+                        }
+                        var array = [];
+                        for(var i = 0;i<stocks.length;i++){
+                            stocks[i].price = mapTemp.get(stocks[i].symbol);
+                            array.push(stocks[i]);
+                        }
+                        res.send(array);
                     }
-                    res.send(array);
-                }
-            });
+                });
+            }
         });
     });
 
