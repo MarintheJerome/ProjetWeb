@@ -81,14 +81,14 @@ app.route('/buy')
                 });
             }
             // Update dans Money
-           /* Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
-                console.log(money);
+            Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
                 var toUpdate = money[0];
                 toUpdate.boughtValue += parseFloat(req.body.price);
+                toUpdate.gain-= req.body.price;
                 toUpdate.save(function (err) {
                     if (err) throw err;
                 });
-            });*/
+            });
             res.send(actionToSave);
         })
     });

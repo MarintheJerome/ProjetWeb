@@ -1,5 +1,5 @@
 angular.module('actions').controller('BuyController',
-    ['$scope', '$http', 'StockBought', function($scope,  $http, StockBought) {
+    ['$scope', '$http', 'StockBought', 'Money', function($scope,  $http, StockBought, Money) {
         $scope.stocksbought = [];
 
         $scope.$parent.buyStock = function(stock){
@@ -17,6 +17,13 @@ angular.module('actions').controller('BuyController',
                     $scope.stocksbought.splice(compteur, 1);
                 }
                 $scope.stocksbought.push(stock);
+
+                $http.get('http://localhost:3000/money')
+                    .then(function(rep) {
+                        Money.update(rep.data);
+                    }, function(error) {
+                        console.log(error);
+                    });
             })
         }
     }]);
