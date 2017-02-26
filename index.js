@@ -80,8 +80,36 @@ app.route('/buy')
                     if (err) throw err;
                 });
             }
+            // Update dans Money
+           /* Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
+                console.log(money);
+                var toUpdate = money[0];
+                toUpdate.boughtValue += parseFloat(req.body.price);
+                toUpdate.save(function (err) {
+                    if (err) throw err;
+                });
+            });*/
             res.send(actionToSave);
         })
     });
+
+app.route('/money')
+    .get(function(req, res, next){
+        Money.find({}, function (err, money) {
+            var moneyValue = new Money();
+            if(money.length > 0) {
+                moneyValue = money[money.length-1];
+            }else{
+                moneyValue.boughtValue = 0;
+                moneyValue.soldValue = 0;
+                moneyValue.gain = 0;
+                moneyValue.save( function(err){
+                    if ( err ) throw err;
+                });
+            }
+            res.send(moneyValue);
+        })
+    });
+
 app.listen('3000');
 console.log('Server is running...');

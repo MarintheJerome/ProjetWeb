@@ -81,20 +81,20 @@
                 </table>
             </div>
         </div>
-        <div id="plusvalue" style="display: flex; flex-direction: column" class="rectangle col-md-6">
+        <div id="plusvalue" ng-controller="MoneyController" style="display: flex; flex-direction: column" class="rectangle col-md-6">
             <h2 class="text-center ">Plus-value</h2>
             <div class="divPlusValue">
                 <p>
                     <label class="portefeuille">Argent dépensé : </label>
-                    <label id="nbArgentDepense" class="portefeuille" >0$</label>
+                    <label id="nbArgentDepense" class="portefeuille" >{{money.boughtValue}}$</label>
                 </p>
                 <p>
                     <label class="portefeuille">Somme vendue :  </label>
-                    <label id="nbVendue" class="portefeuille" >0$</label>
+                    <label id="nbVendue" class="portefeuille" >{{money.soldValue}}$</label>
                 </p>
                 <p>
                     <label class="portefeuille">Plus-value réalisée :  </label>
-                    <label id="nbPlusValue" class="portefeuille" >0$</label>
+                    <label id="nbPlusValue" class="portefeuille" >{{money.gain}}$</label>
                 </p>
             </div>
         </div>
@@ -107,11 +107,13 @@
 <script src="client/js/app.js"></script>
 <script src="client/js/graphique.js"></script>
 <script src="client/js/search.js"></script>
+<script src="client/app/model/money.js"></script>
 <script src="client/app/model/stock.js"></script>
 <script src="client/app/model/stockBought.js"></script>
 <script src="client/app/directive/stock-directive.js"></script>
 <script src="client/app/directive/stockbought-directive.js"></script>
 <script src="client/app/controller/TableController.js"></script>
 <script src="client/app/controller/BuyController.js"></script>
+<script src="client/app/controller/MoneyController.js"></script>
 </body>
 </html>
