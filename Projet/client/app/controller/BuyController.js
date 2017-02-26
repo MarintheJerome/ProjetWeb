@@ -3,7 +3,6 @@ angular.module('actions').controller('BuyController',
         $scope.stocksbought = [];
 
         $scope.$parent.buyStock = function(stock){
-            console.log($scope.stocksbought);
             $http.post("http://localhost:3000/buy", stock).then(function (rep){
                 var alreadyExists = false;
                 var stock = new StockBought(rep.data);

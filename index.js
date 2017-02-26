@@ -134,7 +134,6 @@ app.route("/updateStock")
                     }
                 }
                 allSymbol += ")";
-                console.log("All symbol : "+allSymbol + "\n\n\n");
 
                 var url = "https://query.yahooapis.com/v1/public/yql?q=env%20'store%3A%2F%2Fdatatables.org%2Falltableswithkeys'%3B%20" ;
                 var requete = "select symbol, price from yahoo.finance.quotes where symbol IN (" + allSymbol;
@@ -166,7 +165,6 @@ app.route("/updateStock")
 
 app.route('/money')
     .get(function(req, res, next){
-        // mongoose.connection.db.dropDatabase();
         Money.find({}, function (err, money) {
             var moneyValue = new Money();
             if(money.length > 0) {

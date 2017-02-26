@@ -8,7 +8,6 @@ angular.module('actions').controller('StockBoughtController',
             $scope.stocksbought = ListStock;
 
             $http.get('http://localhost:3000/updateStock').then(function(response) {
-                console.log("hi");
                     response.data.forEach(function(data) {
                         var stockBought = new StockBought(data);
                         ListStock.insert(stockBought);
