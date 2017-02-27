@@ -4,25 +4,21 @@
 angular.module('actions').factory('Graphic',
     [function() {
         var graph = c3.generate({
-            bindto: '#chart',
             data: {
                 columns: [
-                    ['Gain', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    ['Somme achetée', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    ['Somme vendue', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    ['Gain'],
+                    ['Somme achetée'],
+                    ['Somme vendue']
                 ]
             },
-            color: {
-                pattern: ['#1E90FF', '#aec7e8']
-            }
         });
 
-        graph.update = function(value) {
-            graph.flow({
+        graph.update = function(gain, boughtValue, soldValue) {
+            graph.load({
                 columns: [
-                    ['Gain', value.gain.toFixed(2)],
-                    ['Somme achetée', value.boughtValue.toFixed(2)],
-                    ['Somme vendue', value.soldValue.toFixed(2)]
+                    gain,
+                    boughtValue,
+                    soldValue
                 ]
             });
         };
