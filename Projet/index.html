@@ -54,7 +54,7 @@
                     </table>
                 </div>
         </div>
-        <div id="graphique" style="display: flex; flex-direction: column" class="rectangle col-md-6" >
+        <div ng-controller="GraphicController" id="graphique" style="display: flex; flex-direction: column" class="rectangle col-md-6" >
             <h2 class="text-center ">Graphics</h2>
             <div id="chart"></div>
         </div>
@@ -111,6 +111,7 @@
 <script src="client/app/model/stock.js"></script>
 <script src="client/app/model/stockBought.js"></script>
 <script src="client/app/model/ListStock.js"></script>
+<script src="client/app/model/Graphic.js"></script>
 <script src="client/app/directive/stock-directive.js"></script>
 <script src="client/app/directive/stockbought-directive.js"></script>
 <script src="client/app/controller/TableController.js"></script>
@@ -118,5 +119,6 @@
 <script src="client/app/controller/SellController.js"></script>
 <script src="client/app/controller/StockBoughtController.js"></script>
 <script src="client/app/controller/MoneyController.js"></script>
+<script src="client/app/controller/GraphicController.js"></script>
 </body>
 </html>

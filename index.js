@@ -28,8 +28,15 @@ var MoneySchema = new Schema({
     gain: Number
 });
 
+var GraphicSchema = new Schema({
+    boughtValue: Number,
+    soldValue: Number,
+    gain: Number
+});
+
 var Stock = mongoose.model('Stock', StockSchema);
 var Money = mongoose.model('Money', MoneySchema);
+var Graphic = mongoose.model('Graphic', GraphicSchema);
 
 //  angularJS app directory
 app.use(express.static(__dirname + '/Projet'));
@@ -76,8 +83,9 @@ app.route('/buy')
             } else { // on insert
                 actionToSave.boughtPrice = parseFloat(req.body.price);
                 actionToSave.currentPrice = parseFloat(req.body.price);
+                actionToSave.quantity = 1;
                 actionToSave.save(function (err) {
-                    if (err) throw err;
+                     if (err) throw err;
                 });
             }
             // Update dans Money
@@ -86,6 +94,16 @@ app.route('/buy')
                 toUpdate.boughtValue += parseFloat(req.body.price);
                 toUpdate.gain -= parseFloat(req.body.price);
                 toUpdate.save(function (err) {
+                    if (err) throw err;
+                });
+            });
+            // Insert dans graphic
+            Graphic.find({}).sort({$natural:-1}).limit(1).exec(function(err, graph){
+                var newGraph = new Graphic();
+                newGraph.boughtValue = parseFloat(graph[0].boughtValue) +  parseFloat(req.body.price);
+                newGraph.soldValue =  parseFloat(graph[0].soldValue);
+                newGraph.gain = parseFloat(graph[0].gain) - parseFloat(req.body.price);
+                newGraph.save(function (err) {
                     if (err) throw err;
                 });
             });
@@ -98,7 +116,7 @@ app.route('/sell')
         Stock.findOne({"name": req.body.name}, '_id name quantity currentPrice', function(err, stock){
             if(stock != null){
                 if (err) return handleError(err);
-                stock.quantity--
+                stock.quantity--;
                 if(stock.quantity >= 1){
                     stock.save(function (err) {
                         if (err) throw err;
@@ -111,9 +129,19 @@ app.route('/sell')
                 }
                 Money.find({}, '_id boughtValue soldValue gain', function (err, money) {
                     var toUpdate = money[0];
-                    toUpdate.soldValue += parseFloat(req.body.currentPrice);
+                    toUpdate.soldValue += parseFloat(stock.currentPrice);
                     toUpdate.gain += parseFloat(stock.currentPrice);
                     toUpdate.save(function (err) {
+                        if (err) throw err;
+                    });
+                });
+                // Insert dans graphic
+                Graphic.find({}).sort({$natural:-1}).limit(1).exec(function(err, graph){
+                    var newGraph = new Graphic();
+                    newGraph.boughtValue = parseFloat(graph[0].boughtValue);
+                    newGraph.soldValue =  parseFloat(graph[0].soldValue) +  parseFloat(stock.currentPrice);
+                    newGraph.gain = parseFloat(graph[0].gain) + parseFloat(stock.currentPrice);
+                    newGraph.save(function (err) {
                         if (err) throw err;
                     });
                 });
@@ -136,24 +164,23 @@ app.route("/updateStock")
                 allSymbol += ")";
 
                 var url = "https://query.yahooapis.com/v1/public/yql?q=env%20'store%3A%2F%2Fdatatables.org%2Falltableswithkeys'%3B%20" ;
-                var requete = "select symbol, price from yahoo.finance.quotes where symbol IN (" + allSymbol;
+                var requete = "select symbol, bid from yahoo.finance.quotes where symbol IN (" + allSymbol;
                 var data = encodeURIComponent(requete);
                 var fullUrl = url + data + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
                 request(fullUrl, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
-                        console.log(JSON.parse(body).query.results.quote);
                         var mapTemp = new Map();
                         // on fetch sur tout ce qu'on a récup
                         if( JSON.parse(body).query.results.quote.length > 1) {
                             (JSON.parse(body).query.results.quote).forEach(function (element) {
-                                mapTemp.set(element.symbol, element.price);
+                                mapTemp.set(element.symbol, element.bid);
                             });
                         }else{
-                            mapTemp.set(JSON.parse(body).query.results.quote.symbol, JSON.parse(body).query.results.quote.price);
+                            mapTemp.set(JSON.parse(body).query.results.quote.symbol, JSON.parse(body).query.results.quote.bid);
                         }
                         var array = [];
                         for(var i = 0;i<stocks.length;i++){
-                            stocks[i].price = mapTemp.get(stocks[i].symbol);
+                            stocks[i].bid = mapTemp.get(stocks[i].symbol);
                             array.push(stocks[i]);
                         }
                         res.send(array);
@@ -179,6 +206,28 @@ app.route('/money')
             }
             res.send(moneyValue);
         })
+    });
+
+app.route('/graphic')
+    .get(function(req, res, next){
+        Graphic.find({}).sort('-date').limit(10).exec(function(err, graphics){
+            var graphicValue = new Graphic();
+            var array = [];
+            if(graphics.length > 0){
+                for(var i = 0;i<graphics.length;i++){
+                    array[i] = graphics[i]
+                }
+            }else{
+                graphicValue.boughtValue = 0;
+                graphicValue.soldValue = 0;
+                graphicValue.gain = 0;
+                graphicValue.save( function(err){
+                    if ( err ) throw err;
+                });
+                array[0] = graphicValue;
+            }
+            res.send(array);
+        });
     });
 
 app.listen('3000');
