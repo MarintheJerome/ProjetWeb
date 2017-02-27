@@ -180,13 +180,17 @@ app.route("/updateStock")
                         }
                         var array = [];
                         for(var i = 0;i<stocks.length;i++){
-                            stocks[i].boughtPrice = mapTemp.get(stocks[i].symbol);
+                            stocks[i].currentPrice = mapTemp.get(stocks[i].symbol);
+                            stocks[i].save( function(err){
+                                if ( err ) throw err;
+                            });
                             array.push(stocks[i]);
                         }
-                        console.log(array);
                         res.send(array);
                     }
                 });
+            }else{
+                res.send([]);
             }
         });
     });

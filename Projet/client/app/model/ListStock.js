@@ -13,6 +13,15 @@ angular.module('actions').factory('ListStock',
             ListStock.splice(i, 1);
         };
 
+        ListStock.update = function(value){
+            for(var i = 0;i<ListStock.length;i++){
+                if(value.name == ListStock[i].name){
+                    ListStock[i] = value;
+                    break;
+                }
+            }
+        };
+
         ListStock.refresh = function() {
             ListStock = [];
         };

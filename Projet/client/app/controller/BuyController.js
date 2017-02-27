@@ -28,8 +28,6 @@ angular.module('actions').controller('BuyController',
             setTimeout(function() {
                 $http.get('http://localhost:3000/graphic')
                     .then(function(rep) {
-                        console.log(rep.data.length);
-                        console.log(rep);
                         var arrayGain = [];
                         arrayGain.push("Gain");
                         var arrayBoughtValue = [];

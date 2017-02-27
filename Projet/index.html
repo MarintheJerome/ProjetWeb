@@ -18,20 +18,6 @@
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false"><span class="caret"></span></button>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label>Price min</label>
-                                            <input ng-model="minPrice" class="form-control" type="text"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Price max</label>
-                                            <input ng-model="maxPrice" class="form-control" type="text"/>
-                                        </div>
-                                    </form>
-                                </div>
                                 <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
                         </div>
@@ -41,7 +27,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="col-md-1">Nom</th>
+                            <th class="col-md-2">Nom</th>
                             <th class="col-md-1">Symbole</th>
                             <th class="col-md-1">Prix</th>
                             <th class="col-md-1">Acheter</th>
@@ -93,7 +79,7 @@
                     <label id="nbVendue" class="portefeuille" >{{money.soldValue}}$</label>
                 </p>
                 <p>
-                    <label class="portefeuille">Plus-value réalisée :  </label>
+                    <label class="portefeuille">Gain :  </label>
                     <label id="nbPlusValue" class="portefeuille" >{{money.gain}}$</label>
                 </p>
             </div>
@@ -106,13 +92,13 @@
 <script src="client/lib/c3-0.4.11/c3.js"></script>
 <script src="client/js/app.js"></script>
 <script src="client/js/graphique.js"></script>
-<script src="client/app/model/money.js"></script>
-<script src="client/app/model/stock.js"></script>
-<script src="client/app/model/stockBought.js"></script>
+<script src="client/app/model/Money.js"></script>
+<script src="client/app/model/Stock.js"></script>
+<script src="client/app/model/StockBought.js"></script>
 <script src="client/app/model/ListStock.js"></script>
 <script src="client/app/model/Graphic.js"></script>
-<script src="client/app/directive/stock-directive.js"></script>
-<script src="client/app/directive/stockbought-directive.js"></script>
+<script src="client/app/directive/Stock-directive.js"></script>
+<script src="client/app/directive/Stockbought-directive.js"></script>
 <script src="client/app/controller/TableController.js"></script>
 <script src="client/app/controller/BuyController.js"></script>
 <script src="client/app/controller/SellController.js"></script>

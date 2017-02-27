@@ -1,7 +1,6 @@
 angular.module('actions').controller('SellController',
     ['$scope', '$http', 'StockBought', 'Money', 'ListStock', 'Graphic', function($scope,  $http, StockBought, Money, ListStock, Graphic) {
         $scope.$parent.sellStock = function(stock){
-
             $http.post("http://localhost:3000/sell", stock).then(function (rep){
                 var compteur = -1;
                 for(var i = 0; i < ListStock.length ;i++){
@@ -29,8 +28,6 @@ angular.module('actions').controller('SellController',
             setTimeout(function() {
                 $http.get('http://localhost:3000/graphic')
                     .then(function (rep) {
-                        console.log(rep.data.length);
-                        console.log(rep);
                         var arrayGain = [];
                         arrayGain.push("Gain");
                         var arrayBoughtValue = [];
