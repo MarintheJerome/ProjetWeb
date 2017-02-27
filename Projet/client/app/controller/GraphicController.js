@@ -12,14 +12,11 @@ angular.module('actions').controller('GraphicController',
                 arrayBoughtValue.push("Somme achetée");
                 var arraySoldValue = [];
                 arraySoldValue.push("Somme vendue");
-                for(var i = 0;i<rep.data.length;i++){
-                    arrayGain.push(rep.data[i].gain.toFixed(2));
-                    arrayBoughtValue.push(rep.data[i].boughtValue.toFixed(2));
-                    arraySoldValue.push(rep.data[i].soldValue.toFixed(2));
+                for(var i = rep.data.length;i>0;i--){
+                    arrayGain.push(rep.data[i-1].gain.toFixed(2));
+                    arrayBoughtValue.push(rep.data[i-1].boughtValue.toFixed(2));
+                    arraySoldValue.push(rep.data[i-1].soldValue.toFixed(2));
                 }
-                console.log(arrayGain);
-                console.log(arrayBoughtValue);
-                console.log(arraySoldValue);
                 Graphic.update(arrayGain, arrayBoughtValue, arraySoldValue);
             }, function(error) {
                 console.log(error);

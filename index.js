@@ -210,7 +210,7 @@ app.route('/money')
 
 app.route('/graphic')
     .get(function(req, res, next){
-        Graphic.find({}).sort('-date').limit(10).exec(function(err, graphics){
+        Graphic.find({}).sort({$natural:-1}).limit(10).exec(function(err, graphics){
             var graphicValue = new Graphic();
             var array = [];
             if(graphics.length > 0){
