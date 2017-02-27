@@ -33,7 +33,7 @@ angular.module('actions').controller('BuyController',
                         var arrayGain = [];
                         arrayGain.push("Gain");
                         var arrayBoughtValue = [];
-                        arrayBoughtValue.push("Somme achetée");
+                        arrayBoughtValue.push("Argent dépensé");
                         var arraySoldValue = [];
                         arraySoldValue.push("Somme vendue");
                         for(var i = rep.data.length;i>0;i--){

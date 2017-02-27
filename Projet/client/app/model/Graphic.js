@@ -7,7 +7,7 @@ angular.module('actions').factory('Graphic',
             data: {
                 columns: [
                     ['Gain'],
-                    ['Somme achetée'],
+                    ['Argent dépensé'],
                     ['Somme vendue']
                 ]
             },

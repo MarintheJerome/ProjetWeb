@@ -9,6 +9,7 @@ angular.module('actions').controller('StockBoughtController',
 
             $http.get('http://localhost:3000/updateStock').then(function(response) {
                     response.data.forEach(function(data) {
+                        console.log(data);
                         var stockBought = new StockBought(data);
                         ListStock.insert(stockBought);
                     });

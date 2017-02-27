@@ -164,7 +164,7 @@ app.route("/updateStock")
                 allSymbol += ")";
 
                 var url = "https://query.yahooapis.com/v1/public/yql?q=env%20'store%3A%2F%2Fdatatables.org%2Falltableswithkeys'%3B%20" ;
-                var requete = "select symbol, bid from yahoo.finance.quotes where symbol IN (" + allSymbol;
+                var requete = "select symbol, Ask from yahoo.finance.quotes where symbol IN (" + allSymbol;
                 var data = encodeURIComponent(requete);
                 var fullUrl = url + data + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
                 request(fullUrl, function (error, response, body) {
@@ -173,16 +173,17 @@ app.route("/updateStock")
                         // on fetch sur tout ce qu'on a récup
                         if( JSON.parse(body).query.results.quote.length > 1) {
                             (JSON.parse(body).query.results.quote).forEach(function (element) {
-                                mapTemp.set(element.symbol, element.bid);
+                                mapTemp.set(element.symbol, element.Ask);
                             });
                         }else{
-                            mapTemp.set(JSON.parse(body).query.results.quote.symbol, JSON.parse(body).query.results.quote.bid);
+                            mapTemp.set(JSON.parse(body).query.results.quote.symbol, JSON.parse(body).query.results.quote.Ask);
                         }
                         var array = [];
                         for(var i = 0;i<stocks.length;i++){
-                            stocks[i].bid = mapTemp.get(stocks[i].symbol);
+                            stocks[i].boughtPrice = mapTemp.get(stocks[i].symbol);
                             array.push(stocks[i]);
                         }
+                        console.log(array);
                         res.send(array);
                     }
                 });

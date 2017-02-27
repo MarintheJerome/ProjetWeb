@@ -7,7 +7,7 @@ angular.module('actions').factory('Stock',
             this.name = data.Name;
             this.symbol = data.Symbol;
             this.quantity = 1;
-            this.price = data.Ask;
+            this.price = parseFloat(data.Ask).toFixed(2);
         };
         return Stock;
     }]);

@@ -12,9 +12,9 @@
 <div class="container-fluid">
     <div class="row">
         <div ng-controller="TableController" id="recherche" style="display: flex; flex-direction: column" class="rectangle col-md-6">
-            <h2 class="text-center ">Buy some stocks</h2>
+            <h2 class="text-center ">Acheter des actions</h2>
                 <div class="input-group" id="adv-search">
-                    <input ng-model="searchStocks" type="text" class="form-control" placeholder="Search for stocks"/>
+                    <input ng-model="searchStocks" type="text" class="form-control" placeholder="Cherchez des actions"/>
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
@@ -41,10 +41,10 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="col-md-1">Name</th>
-                            <th class="col-md-1">Symbol</th>
-                            <th class="col-md-1">Price</th>
-                            <th class="col-md-1">Buy</th>
+                            <th class="col-md-1">Nom</th>
+                            <th class="col-md-1">Symbole</th>
+                            <th class="col-md-1">Prix</th>
+                            <th class="col-md-1">Acheter</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,23 +55,23 @@
                 </div>
         </div>
         <div ng-controller="GraphicController" id="graphique" style="display: flex; flex-direction: column" class="rectangle col-md-6" >
-            <h2 class="text-center ">Graphics</h2>
+            <h2 class="text-center ">Graphique</h2>
             <div id="chart"></div>
         </div>
     </div>
     <div class="row">
         <div ng-controller="StockBoughtController" id="allActions" style="display: flex; flex-direction: column"  class="rectangle col-md-6">
-            <h2 class="text-center"> Your Stock </h2>
+            <h2 class="text-center">Vos actions</h2>
             <div id="table-all-actions">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-md-2">Name</th>
-                        <th class="col-md-1">Symbol</th>
-                        <th class="col-md-1">Quantity</th>
-                        <th class="col-md-1">CurrentPrice</th>
-                        <th class="col-md-1">BoughtPrice</th>
-                        <th class="col-md-1">Sell</th>
+                        <th class="col-md-2">Nom</th>
+                        <th class="col-md-1">Symbole</th>
+                        <th class="col-md-1">Quantité</th>
+                        <th class="col-md-1">Prix actuel</th>
+                        <th class="col-md-1">Prix achat</th>
+                        <th class="col-md-1">Vendre</th>
                     </tr>
                     </thead>
                     <tbody>
